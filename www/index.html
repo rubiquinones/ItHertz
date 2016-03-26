@@ -14,7 +14,7 @@
     <script src="cordova.js"></script>
   </head>
 
-<body ng-app="todo" ng-controller="TodoCtrl">
+<body ng-app="ItHertz" ng-controller="MainCtrl">
   <ion-side-menus>
 
   <!-- Center content -->
@@ -23,60 +23,56 @@
     <button class="button button-icon" ng-click="toggleProjects()">
       <i class="icon ion-navicon"></i>
     </button>
-    <h1 class="title">{{activeProject.title}}</h1>
+    <h1 class="title">ItHertz</h1>
     <!-- New Task button-->
-    <button class="button button-icon" ng-click="newTask()">
+<!--     <button class="button button-icon" ng-click="newTask()">
       <i class="icon ion-compose"></i>
-    </button>
+    </button> -->
   </ion-header-bar>
   <ion-content scroll="false">
-    <ion-list>
-      <ion-item ng-repeat="task in activeProject.tasks">
-        {{task.title}}
-      </ion-item>
-    </ion-list>
+    
   </ion-content>
 </ion-side-menu-content>
 
 
-    <script id="new-task.html" type="text/ng-template">
+<script id="setup-user.html" type="text/ng-template">
 
   <div class="modal">
 
     <!-- Modal header bar -->
     <ion-header-bar class="bar-secondary">
-      <h1 class="title">Create Account</h1>
-      <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button>
+      <h1 class="title">First Time Setup</h1>
+      <!-- <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button> -->
     </ion-header-bar>
 
     <!-- Modal content area -->
     <ion-content>
 
-      <form ng-submit="createTask(task)">
+      <form ng-submit="setupUser(personalInfo)">
         <div class="list">
           <label class="item item-input">
-            <input type="text" placeholder="First Name" ng-model="task.firstName">
+            <input type="text" placeholder="First Name" ng-model="personalInfo.firstName">
           </label>
           <label class = "item item-input">
-            <input type="text" placeholder ="Last Name" ng-model="task.LastName">
+            <input type="text" placeholder ="Last Name" ng-model="personalInfo.LastName">
           </label>
           <label class = "item item-input">
-            <input type="text" placeholder ="Date of Birth: MM/DD/YYYY" ng-model="task.dateOfBirth">
+            <input type="text" placeholder ="Date of Birth: MM/DD/YYYY" ng-model="personalInfo.dateOfBirth">
           </label>
           <label class = "item item-input">
-            <input type="text" placeholder ="Gender: Female/Male" ng-model="task.gender">
+            <input type="text" placeholder ="Gender: Female/Male" ng-model="personalInfo.gender">
           </label>
           <label class = "item item-input">
-            <input type="text" placeholder ="Insurance Name: put N/A if not applicable" ng-model="task.insurance">
+            <input type="text" placeholder ="Insurance Name: put N/A if not applicable" ng-model="personalInfo.insurance">
           </label>
           <label class = "item item-input">
-            <input type="text" placeholder ="Blood Type" ng-model="task.bloodType">
+            <input type="text" placeholder ="Blood Type" ng-model="personalInfo.bloodType">
           </label>
           <label class = "item item-input">
-            <input type="text" placeholder ="Allergies: put N/A if not applicable" ng-model="task.allegies">
+            <input type="text" placeholder ="Allergies: put N/A if not applicable" ng-model="personalInfo.allergies">
           </label>
           <label class = "item item-input">
-            <input type="text" placeholder ="Organ Donor: Y/N" ng-model="task.organDonor">
+            <input type="text" placeholder ="Organ Donor: Y/N" ng-model="personalInfo.organDonor">
           </label>
         </div>
         <div class="padding">
