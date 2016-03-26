@@ -45,7 +45,7 @@
 
     <!-- Modal header bar -->
     <ion-header-bar class="bar-secondary">
-      <h1 class="title">New Task</h1>
+      <h1 class="title">Create Account</h1>
       <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button>
     </ion-header-bar>
 
@@ -55,11 +55,32 @@
       <form ng-submit="createTask(task)">
         <div class="list">
           <label class="item item-input">
-            <input type="text" placeholder="What do you need to do?" ng-model="task.title">
+            <input type="text" placeholder="First Name" ng-model="task.firstName">
+          </label>
+          <label class = "item item-input">
+            <input type="text" placeholder ="Last Name" ng-model="task.LastName">
+          </label>
+          <label class = "item item-input">
+            <input type="text" placeholder ="Date of Birth: MM/DD/YYYY" ng-model="task.dateOfBirth">
+          </label>
+          <label class = "item item-input">
+            <input type="text" placeholder ="Gender: Female/Male" ng-model="task.gender">
+          </label>
+          <label class = "item item-input">
+            <input type="text" placeholder ="Insurance Name" ng-model="task.insurance">
+          </label>
+          <label class = "item item-input">
+            <input type="text" placeholder ="Blood Type" ng-model="task.bloodType">
+          </label>
+          <label class = "item item-input">
+            <input type="text" placeholder ="Allergies: put N/A if not applicable" ng-model="task.allegies">
+          </label>
+          <label class = "item item-input">
+            <input type="text" placeholder ="Organ Donor: Y/N" ng-model="task.organDonor">
           </label>
         </div>
         <div class="padding">
-          <button type="submit" class="button button-block button-positive">Create Task</button>
+          <button type="submit" class="button button-block button-positive">Save</button>
         </div>
       </form>
 
