@@ -51,5 +51,6 @@ temp/
 *.log
 *.swp
 
+platforms/
 platforms/ios/
 platforms/android/

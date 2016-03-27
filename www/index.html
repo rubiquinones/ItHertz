@@ -22,14 +22,20 @@
 
     <!-- Center content -->
     <ion-side-menu side="left">
-      <div class="list">
-        <div class="item">
-          <i class="icon ion-gear-a"></i> Settings
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">{{ app.title }}</h1>
+      </ion-header-bar>
+
+      <ion-content>
+        <div class="list">
+          <div class="item">
+            <i class="icon ion-gear-a"></i> Settings
+          </div>
+          <div class="item">
+            <i class="icon ion-information-circled"></i> About
+          </div>
         </div>
-        <div class="item">
-          <i class="icon ion-information-circled"></i> About
-        </div>
-      </div>
+      </ion-content>
     </ion-side-menu>
 
     <ion-side-menu-content>
@@ -38,7 +44,7 @@
         <button class="button button-icon" ng-click="toggleSidebar()">
           <i class="icon ion-navicon"></i>
         </button>
-        <h1 class="title">ItHertz</h1>
+        <h1 class="title">{{ app.title }}</h1>
       </ion-header-bar>
 
       <!-- Content Pane -->

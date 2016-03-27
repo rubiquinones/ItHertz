@@ -23,6 +23,9 @@ angular.module('ItHertz', ['ionic'])
 .controller('MainCtrl', function ($scope, $timeout, $ionicModal, $ionicSideMenuDelegate, PersonalInfo) {
   // Get status of application
   $scope.protected = window.localStorage['protected'];
+  $scope.app = {
+    title: "ItHertz"
+  };
 
   // Create our modal
   $ionicModal.fromTemplateUrl('setup-user.html', function (modal) {
