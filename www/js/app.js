@@ -50,3 +50,4 @@ angular.module('ItHertz', ['ionic'])
     }
   });
 });
+

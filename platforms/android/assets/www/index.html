@@ -15,79 +15,102 @@
   </head>
 
 <body ng-app="ItHertz" ng-controller="MainCtrl" class="platform-android platform-cordova platform-webview">
+  
+
+  <!-- Side menus -->
   <ion-side-menus>
 
-  <!-- Center content -->
-<ion-side-menu-content>
-  <ion-header-bar class="bar-dark">
-    <button class="button button-icon" ng-click="toggleProjects()">
-      <i class="icon ion-navicon"></i>
-    </button>
-    <h1 class="title">ItHertz</h1>
-    <!-- New Task button-->
-<!--     <button class="button button-icon" ng-click="newTask()">
-      <i class="icon ion-compose"></i>
-    </button> -->
-  </ion-header-bar>
-  <ion-content scroll="false">
-    
-  <ion-toggle ng-model=button" toggle-class="toggle-calm">ItHertz</ion-toggle>
-
-  </ion-content>
-</ion-side-menu-content>
-
-
-<script id="setup-user.html" type="text/ng-template">
-
-  <div class="modal">
-
-    <!-- Modal header bar -->
-    <ion-header-bar class="bar-secondary">
-      <h1 class="title">First Time Setup</h1>
-      <!-- <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button> -->
-    </ion-header-bar>
-
-    <!-- Modal content area -->
-    <ion-content>
-
-      <form ng-submit="setupUser(personalInfo)">
-        <div class="list">
-          <label class="item item-input">
-            <input type="text" placeholder="First Name" ng-model="personalInfo.firstName">
-          </label>
-          <label class = "item item-input">
-            <input type="text" placeholder ="Last Name" ng-model="personalInfo.LastName">
-          </label>
-          <label class = "item item-input">
-            <input type="text" placeholder ="Date of Birth: MM/DD/YYYY" ng-model="personalInfo.dateOfBirth">
-          </label>
-          <label class = "item item-input">
-            <input type="text" placeholder ="Gender: Female/Male" ng-model="personalInfo.gender">
-          </label>
-          <label class = "item item-input">
-            <input type="text" placeholder ="Insurance Name: put N/A if not applicable" ng-model="personalInfo.insurance">
-          </label>
-          <label class = "item item-input">
-            <input type="text" placeholder ="Blood Type" ng-model="personalInfo.bloodType">
-          </label>
-          <label class = "item item-input">
-            <input type="text" placeholder ="Allergies: put N/A if not applicable" ng-model="personalInfo.allergies">
-          </label>
-          <label class = "item item-input">
-            <input type="text" placeholder ="Organ Donor: Y/N" ng-model="personalInfo.organDonor">
-          </label>
+    <!-- Center content -->
+    <ion-side-menu side="left">
+      <div class="list">
+        <div class="item">
+          <i class="icon ion-gear-a"></i> Settings
         </div>
-        <div class="padding">
-          <button type="submit" class="button button-block button-positive">Save</button>
+        <div class="item">
+          <i class="icon ion-information-circled"></i> About
         </div>
-      </form>
+      </div>
+    </ion-side-menu>
 
-    </ion-content>
+    <ion-side-menu-content>
+      <!-- Header -->
+      <ion-header-bar class="bar-dark">
+        <button class="button button-icon" ng-click="toggleSidebar()">
+          <i class="icon ion-navicon"></i>
+        </button>
+        <h1 class="title">ItHertz</h1>
+      </ion-header-bar>
 
-  </div>
+      <!-- Content Pane -->
+      <ion-content scroll="false">
 
-</script>
+
+      <center><ion-card><ion-card-header><label style="font-size:25px; top:20vh; position:absolute; right:40px; width:300px;padding:10px">READY FREDDY?</label></ion-card-header></ion-card></center>
+      <center><ion-card><ion-card-content><label style="top:28vh; position:absolute; right:40px;width:300px;padding:10px;">Enable to contact emergency services when a crash is detected.</label></ion-card-content></ion-card></center>
+        <!-- TOGGLE BUTTON -->
+      <center><label class="toggle toggle-calm" style="top:40vh;">
+      <input type="checkbox">
+      <div class="track">
+         <div class="handle"></div>
+      </div>
+      </label>
+          <br></center><!-- END OF TOGGLE BUTTON -->
+
+      </ion-content>
+    </ion-side-menu-content>
 
   </ion-side-menus>
+
+
+  <script id="setup-user.html" type="text/ng-template">
+
+    <div class="modal">
+
+      <!-- Modal header bar -->
+      <ion-header-bar class="bar-secondary">
+        <h1 class="title">First Time Setup</h1>
+        <!-- <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button> -->
+      </ion-header-bar>
+
+      <!-- Modal content area -->
+      <ion-content>
+
+        <form ng-submit="setupUser(personalInfo)">
+          <div class="list">
+            <label class="item item-input">
+              <input type="text" placeholder="First Name" ng-model="personalInfo.firstName">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="Last Name" ng-model="personalInfo.LastName">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="Date of Birth: MM/DD/YYYY" ng-model="personalInfo.dateOfBirth">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="Gender: Female/Male" ng-model="personalInfo.gender">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="Insurance Name: put N/A if not applicable" ng-model="personalInfo.insurance">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="Blood Type" ng-model="personalInfo.bloodType">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="Allergies: put N/A if not applicable" ng-model="personalInfo.allergies">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="Organ Donor: Y/N" ng-model="personalInfo.organDonor">
+            </label>
+          </div>
+          <div class="padding">
+            <button type="submit" class="button button-block button-positive">Save</button>
+          </div>
+        </form>
+
+      </ion-content>
+
+    </div>
+
+  </script>
 </body>
 </html>
