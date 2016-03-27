@@ -16,54 +16,42 @@
 
 <body ng-app="ItHertz" ng-controller="MainCtrl" class="platform-android platform-cordova platform-webview">
   
-
-  <!-- Side menus -->
-  <ion-side-menus>
-
-    <!-- Center content -->
-    <ion-side-menu side="left">
-      <div class="list">
-        <div class="item">
-          <i class="icon ion-gear-a"></i> Settings
-        </div>
-        <div class="item">
-          <i class="icon ion-information-circled"></i> About
-        </div>
-      </div>
-    </ion-side-menu>
-
-    <ion-side-menu-content>
-      <!-- Header -->
-      <ion-header-bar class="bar-dark">
-        <button class="button button-icon" ng-click="toggleSidebar()">
+<ion-side-menus>
+  <ion-side-menu-content>
+    <ion-header-bar class="bar-dark">
+      <button class="button button-icon" ng-click="toggleSidebar()">
           <i class="icon ion-navicon"></i>
         </button>
-        <h1 class="title">ItHertz</h1>
-      </ion-header-bar>
+        <h1 class="title">{{ app.title }}</h1>
+    </ion-header-bar>
 
-      <!-- Content Pane -->
-      <ion-content scroll="false">
+    <ion-nav-view></ion-nav-view>
+  </ion-side-menu-content>
 
+  <!-- Side Menu -->
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar bar-header bar-stable">
+      <h1 class="title">Menu</h1>
+    </ion-header-bar>
+    <ion-content has-header="true">
+      <ul class="list">
+        <div ui-sref="home" ng-click="toggleSidebar()" class="item">
+          <i class="icon ion-home"></i> Home
+        </div>
+        <div ng-click="toggleSidebar()" class="item">
+          <i class="icon ion-gear-a"></i> Settings
+        </div>
+        <div ui-sref="about" ng-click="toggleSidebar()" class="item">
+          <i class="icon ion-information-circled"></i> About
+        </div>
+        <div class="item">
+          X: {{ acceleration.x }}
+        </div>
+      </ul>
+    </ion-content>
 
-      <center><ion-card><ion-card-header><label style="font-size:25px; top:20vh; position:absolute; right:40px; width:300px;padding:10px;">READY FREDDY?</label></ion-card-header></ion-card></center>
-      <center><ion-card><ion-card-content><label style="top:28vh; position:absolute; right:40px;width:300px;padding:10px;">Enable to contact emergency services when a crash is detected.</label></ion-card-content></ion-card></center>
-        <!-- TOGGLE BUTTON -->
-      <center><label class="toggle toggle-calm" style="top:40vh;">
-      <input type="checkbox">
-      <div class="track">
-         <div class="handle"></div>
-      </div>
-      </label>
-          <br></center><!-- END OF TOGGLE BUTTON -->
-
-      <!-- Insert logo on the bottom of the screen -->
-      <center><img src="img/logo50x50px.png"></center>
-
-      </ion-content>
-    </ion-side-menu-content>
-
-  </ion-side-menus>
-
+  </ion-side-menu>
+</ion-side-menus>
 
    <!-- FIRST TIME SETUP 1 -->
   <script id="setup-user.html" type="text/ng-template">
@@ -192,6 +180,6 @@
 
     </div>
 
-  </script> <!-- End of First Time Setup 1 -->
+  </script> <!-- End of First Time Setup 3 -->
 </body>
 </html>
