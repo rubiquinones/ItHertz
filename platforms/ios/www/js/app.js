@@ -71,7 +71,7 @@ angular.module('ItHertz', ['ionic'])
 }])
 .controller('MainCtrl', function ($scope, $timeout, $interval, $ionicModal, $state, $ionicSideMenuDelegate, PersonalInfo) {
   // Get status of application
-  $scope.protected = window.localStorage['protected'];
+  $scope.protected = false;
 
   // Setup variables
   $scope.app = {
@@ -127,13 +127,28 @@ angular.module('ItHertz', ['ionic'])
 
   $scope.initAlert = function (seconds) {
     $scope.alertTimer = seconds;
-    $interval(function () {
+    $scope.dontAlert = false;
+
+    console.log("THIS SCRIPT");
+
+      cordova.plugins.notification.local.schedule({
+        id: 2,
+        text: 'Emergency services called.'
+      });
+
+    $scope.alertCountdown = $interval(function () {
         $scope.alertTimer -= 1;
 
-        if ($scope.alertTimer == 0) {
-          console.log("Calling emergency services")
+        if ($scope.alertTimer == 0 && $scope.dontAlert == true) {
+          console.log("Calling emergency services...");
+          $state.go('about');
         }
     }, 1000, seconds);
+  };
+
+  $scope.cancelAlert = function () {
+    $scope.dontAlert = true;
+    $state.go('home');
   };
 
   document.addEventListener("deviceready", function () {
@@ -158,13 +173,26 @@ angular.module('ItHertz', ['ionic'])
 
     // Get informed when the background mode has been activated
     cordova.plugins.backgroundMode.onactivate = function () {
-      var time = new Date();
-      time.setSeconds(time.getSeconds() + 10);
+      
+    };
+
+    // - LISTENER -
+    $scope.toggleProtected = function () {
+      $scope.protected = !$scope.protected;
+      console.log("Something: " + $scope.protected);
+      if ($scope.protected == true) {
+        console.log("Should notify");
+        var time = new Date();
+        time.setSeconds(time.getSeconds() + 10);
         cordova.plugins.notification.local.schedule({
           id: 1,
-          text: 'Test Message 1',
+          text: 'It looks like something happened, to cancel open this notification.',
           at: time
-      });
+        });
+        $timeout(function () {
+          $scope.initAlert(20);
+        }, 10 * 1000);
+      }
     };
 
     // Get informed when the background mode has been deactivated
