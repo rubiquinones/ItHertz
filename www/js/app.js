@@ -20,6 +20,19 @@ angular.module('ItHertz', ['ionic'])
     }
   }
 })
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: 'home.html'
+    })
+    .state('about', {
+      url: '/about',
+      templateUrl: 'about.html'
+    });
+
+    $urlRouterProvider.otherwise('/');
+}])
 .controller('MainCtrl', function ($scope, $timeout, $ionicModal, $ionicSideMenuDelegate, PersonalInfo) {
   // Get status of application
   $scope.protected = window.localStorage['protected'];
@@ -43,7 +56,7 @@ angular.module('ItHertz', ['ionic'])
   };
 
   $scope.toggleSidebar = function () {
-    // $ionicSideMenuDelegate.toggleLeft();
+    $ionicSideMenuDelegate.toggleLeft();
   };
 
   // Run stuff

@@ -20,7 +20,7 @@ angular.module('ItHertz', ['ionic'])
     }
   }
 })
-.controller('MainCtrl', function ($scope, $timeout, $ionicModal, PersonalInfo) {
+.controller('MainCtrl', function ($scope, $timeout, $ionicModal, $ionicSideMenuDelegate, PersonalInfo) {
   // Get status of application
   $scope.protected = window.localStorage['protected'];
 
@@ -36,6 +36,10 @@ angular.module('ItHertz', ['ionic'])
     PersonalInfo.save(personalInfo);
   };
 
+  $scope.toggleSidebar = function () {
+    $ionicSideMenuDelegate.toggleLeft();
+  };
+
   $timeout(function () {
     if (!PersonalInfo.all()) {
       $scope.personalInfo = {};
@@ -43,3 +47,4 @@ angular.module('ItHertz', ['ionic'])
     }
   });
 });
+
