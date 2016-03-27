@@ -45,7 +45,7 @@
       <ion-content scroll="false">
 
 
-      <center><ion-card><ion-card-header><label style="font-size:25px; top:20vh; position:absolute; right:40px; width:300px;padding:10px">READY FREDDY?</label></ion-card-header></ion-card></center>
+      <center><ion-card><ion-card-header><label style="font-size:25px; top:20vh; position:absolute; right:40px; width:300px;padding:10px;">READY FREDDY?</label></ion-card-header></ion-card></center>
       <center><ion-card><ion-card-content><label style="top:28vh; position:absolute; right:40px;width:300px;padding:10px;">Enable to contact emergency services when a crash is detected.</label></ion-card-content></ion-card></center>
         <!-- TOGGLE BUTTON -->
       <center><label class="toggle toggle-calm" style="top:40vh;">
@@ -56,19 +56,23 @@
       </label>
           <br></center><!-- END OF TOGGLE BUTTON -->
 
+      <!-- Insert logo on the bottom of the screen -->
+      <center><img src="img/logo50x50px.png"></center>
+
       </ion-content>
     </ion-side-menu-content>
 
   </ion-side-menus>
 
 
+   <!-- FIRST TIME SETUP 1 -->
   <script id="setup-user.html" type="text/ng-template">
 
     <div class="modal">
 
       <!-- Modal header bar -->
       <ion-header-bar class="bar-secondary">
-        <h1 class="title">First Time Setup</h1>
+        <h1 class="title">First Time Setup Personal Information</h1>
         <!-- <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button> -->
       </ion-header-bar>
 
@@ -103,6 +107,83 @@
             </label>
           </div>
           <div class="padding">
+            <button type="submit" class="button button-block button-positive">Next</button>
+          </div>
+        </form>
+
+      </ion-content>
+
+    </div>
+
+  </script> <!-- End of First Time Setup 1 -->
+
+   <!-- FIRST TIME SETUP 2 -->
+  <script id="setup-user2.html" type="text/ng-template">
+
+    <div class="modal">
+
+      <!-- Modal header bar -->
+      <ion-header-bar class="bar-secondary">
+        <h1 class="title">First Time Setup Vehicle Information</h1>
+        <!-- <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button> -->
+      </ion-header-bar>
+
+      <!-- Modal content area -->
+      <ion-content>
+
+        <form ng-submit="setupUser(personalInfo)">
+          <div class="list">
+            <label class="item item-input">
+              <input type="text" placeholder="Car or Van or Truck" ng-model="personalInfo.model">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="color" ng-model="personalInfo.color">
+            </label>
+          </div>
+          <div class="padding">
+            <button type="submit" class="button button-block button-positive">Next</button>
+          </div>
+        </form>
+
+      </ion-content>
+
+    </div>
+
+  </script> <!-- End of First Time Setup 2 -->
+
+   <!-- FIRST TIME SETUP 3-->
+  <script id="setup-user3.html" type="text/ng-template">
+
+    <div class="modal">
+
+      <!-- Modal header bar -->
+      <ion-header-bar class="bar-secondary">
+        <h1 class="title">First Time Setup</h1>
+        <!-- <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button> -->
+      </ion-header-bar>
+
+      <!-- Modal content area -->
+      <ion-content>
+
+        <form ng-submit="setupUser(personalInfo)">
+          <div class="list">
+            <label class="item item-input">
+              <input type="text" placeholder="Pimary Contact: First Name" ng-model="personalInfo.pcFirst">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="Primary Contact: Last Name" ng-model="personalInfo.pcLast">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="Relationship" ng-model="personalInfo.relationship">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="Phone Number" ng-model="personalInfo.phoneNumber">
+            </label>
+            <label class = "item item-input">
+              <input type="text" placeholder ="E-Mail" ng-model="personalInfo.email">
+            </label>
+          </div>
+          <div class="padding">
             <button type="submit" class="button button-block button-positive">Save</button>
           </div>
         </form>
@@ -111,6 +192,6 @@
 
     </div>
 
-  </script>
+  </script> <!-- End of First Time Setup 1 -->
 </body>
 </html>
