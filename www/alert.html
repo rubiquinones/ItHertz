@@ -25,7 +25,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]:before {
-    content: "slide to unlock";
+    content: "slide to cancel";
     color: #8a8a8a;
     position: absolute;
     left: 100px;
@@ -50,7 +50,7 @@ input[type="range"]::-webkit-slider-thumb:before {
 <ion-view title="!">
 
   <ion-content has-header="true" padding="true" ng-init="initAlert(5)">
-    <h3 class="title">ALERT</h3>
+   <center> <h3 class="title">ALERT</h3> </center>
 
     <center>
     	<ion-card>
@@ -62,13 +62,17 @@ input[type="range"]::-webkit-slider-thumb:before {
 
 		<ion-card>
 			<ion-card-content>
-				<label style="top:28vh; position:absolute; right:40px;width:300px;padding:10px;">Slide if you DO NOT need medical assistance. You have {{ alertTimer }} seconds to respond.
+				<label style="top:40vh; position:absolute; right:40px;width:300px;padding:10px;">Slide if you DO NOT need medical assistance. You have {{ alertTimer }} seconds to respond.
 				</label>
 			</ion-card-content>
 		</ion-card>
 	</center>
 
-	<center><input type="range" class="slideToUnlock" value="0" max="100"></center>
+	<center>
+		<label style="top:40vh; position:absolute; width:300px; right:150px;">
+		<input type="range" class="slideToUnlock" value="0" max="100">
+		</label>
+	</center>
 
   </ion-content>
 
