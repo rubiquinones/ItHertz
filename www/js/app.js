@@ -70,6 +70,7 @@ angular.module('ItHertz', ['ionic'])
   document.addEventListener("deviceready", function () {
     $scope.acceleration.x = "UGH";
     $scope.acceleration.y = "WHY";
+    
     navigator.accelerometer.watchAcceleration(
       function success(result) {
         $scope.acceleration = result;
@@ -77,7 +78,8 @@ angular.module('ItHertz', ['ionic'])
       function error(error) {
         $scope.acceleration.x = error;
       },{
-        frequency: 10
+        frequency: 1000,
+        period: 1000
       });
 
     // accelerometer.then(
