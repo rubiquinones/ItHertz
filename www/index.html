@@ -20,6 +20,26 @@
   <!-- Side menus -->
   <ion-side-menus>
 
+    <ion-side-menu-content>
+      <!-- Header -->
+      <ion-header-bar class="bar-dark">
+        <button class="button button-icon">
+          <i class="icon ion-navicon"></i>
+        </button>
+        <h1 class="title">{{ app.title }}</h1>
+      </ion-header-bar>
+
+      <!-- Content Pane -->
+      <ion-content scroll="false">
+        
+        <ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">Airplane Mode</ion-toggle>
+        <div class="item">{{ acceleration.x }}</div>
+        <div class="item">{{ acceleration.y }}</div>
+        <div class="item">{{ acceleration.z }}</div>
+
+      </ion-content>
+    </ion-side-menu-content>
+
     <!-- Center content -->
     <ion-side-menu side="left">
       <ion-header-bar class="bar-stable">
@@ -37,23 +57,6 @@
         </div>
       </ion-content>
     </ion-side-menu>
-
-    <ion-side-menu-content>
-      <!-- Header -->
-      <ion-header-bar class="bar-dark">
-        <button class="button button-icon" ng-click="toggleSidebar()">
-          <i class="icon ion-navicon"></i>
-        </button>
-        <h1 class="title">{{ app.title }}</h1>
-      </ion-header-bar>
-
-      <!-- Content Pane -->
-      <ion-content scroll="false">
-        
-        <ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">Airplane Mode</ion-toggle>
-
-      </ion-content>
-    </ion-side-menu-content>
 
   </ion-side-menus>
 
