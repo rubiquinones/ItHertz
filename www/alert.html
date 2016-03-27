@@ -1,11 +1,100 @@
+<style>
+body {
+  background: #eee;
+}
+
+input[type="range"] {
+    width: 320px;
+    margin: 100px;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#000), to(#1f1f1f));
+    -webkit-appearance: none;
+    border-radius: 10px;
+    padding: 5px;
+    transition: opacity 0.5s;
+    position: relative;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(top, #fafafa 0%,#dedede 50%,#cfcfcf 51%,#a3a3a3 100%);
+    z-index: 1;
+    width: 75px;
+    position: relative;
+    height: 50px;
+}
+
+input[type="range"]:before {
+    content: "slide to unlock";
+    color: #8a8a8a;
+    position: absolute;
+    left: 100px;
+    top: 10px;
+    z-index: 1;
+    font-size: 32px;
+}
+
+input[type="range"]::-webkit-slider-thumb:before {
+    color: #8a8a8a;
+    position: absolute;
+    left: 5px;
+    top: -10px;
+    z-index: 1;
+    font-size: 56px;
+    font-weight: bold;
+    content: "→";
+}
+</style>
+
+
 <ion-view title="!">
 
   <ion-content has-header="true" padding="true" ng-init="initAlert(5)">
     <h3 class="title">ALERT</h3>
 
-    <center><ion-card><ion-card-header><label style="font-size:25px; top:20vh; position:absolute; right:40px; width:300px;padding:10px">DO YOU NEED MEDICAL ASSISTANCE?</label></ion-card-header></ion-card></center>
-	<center><ion-card><ion-card-content><label style="top:28vh; position:absolute; right:40px;width:300px;padding:10px;">Slide if you DO NOT need medical assistance. You have {{ alertTimer }} second(s) to respond.</label></ion-card-content></ion-card></center>
+    <center>
+    	<ion-card>
+    		<ion-card-header>
+    			<label style="font-size:25px; top:20vh; position:absolute; right:40px; width:300px;padding:10px">DO YOU NEED MEDICAL ASSISTANCE?
+    		</label>
+    	</ion-card-header></ion-card></center>
+	<center>
+
+		<ion-card>
+			<ion-card-content>
+				<label style="top:28vh; position:absolute; right:40px;width:300px;padding:10px;">Slide if you DO NOT need medical assistance. You have {{ alertTimer }} seconds to respond.
+				</label>
+			</ion-card-content>
+		</ion-card>
+	</center>
+
+	<center><input type="range" class="slideToUnlock" value="0" max="100"></center>
 
   </ion-content>
 
 </ion-view>
+
+<script>
+document.querySelector("input[type=\"range\"]").onmouseup = function() {
+    var theRange = this.value;
+    if(theRange == 100) {
+
+			unlock();
+
+		} else {
+			document.init = setInterval(function() {
+				if(document.querySelector("input[type=\"range\"]").value != 0) {
+					document.querySelector("input[type=\"range\"]").value = theRange--;
+				}
+			}, 1);
+		}
+}
+
+document.querySelector("input[type=\"range\"]").onmousedown = function() {
+		clearInterval(document.init);
+}
+
+function unlock() {
+    document.querySelector("input[type=\"range\"]").style.opacity = "0";
+}
+</script>
