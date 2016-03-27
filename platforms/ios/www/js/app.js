@@ -75,7 +75,7 @@ angular.module('ItHertz', ['ionic'])
 
   // Setup variables
   $scope.app = {
-    title: "ItHertz"
+    title: "Ready Freddy?"
   };
   $scope.acceleration = {};
 
@@ -186,11 +186,11 @@ angular.module('ItHertz', ['ionic'])
         time.setSeconds(time.getSeconds() + 10);
         cordova.plugins.notification.local.schedule({
           id: 1,
-          text: 'It looks like something happened, to cancel open this notification.',
+          text: 'It feels like something happened, contacting emergency services. Open this notification to cancel.',
           at: time
         });
         $timeout(function () {
-          $scope.initAlert(20);
+          $scope.initAlert(30);
         }, 10 * 1000);
       }
     };
