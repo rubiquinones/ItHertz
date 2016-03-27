@@ -1,12 +1,10 @@
 <ion-view title="!">
 
-  <ion-content has-header="true" padding="true">
-    <center><h3 class="title">ALERT</h3><center>
+  <ion-content has-header="true" padding="true" ng-init="initAlert(5)">
+    <h3 class="title">ALERT</h3>
 
     <center><ion-card><ion-card-header><label style="font-size:25px; top:20vh; position:absolute; right:40px; width:300px;padding:10px">DO YOU NEED MEDICAL ASSISTANCE?</label></ion-card-header></ion-card></center>
-	<center><ion-card><ion-card-content><label style="top:28vh; position:absolute; right:40px;width:300px;padding:10px;">Slide if you DO NOT need medical assistance. You have 30 seconds to respond.</label></ion-card-content></ion-card></center>
-
-
+	<center><ion-card><ion-card-content><label style="top:28vh; position:absolute; right:40px;width:300px;padding:10px;">Slide if you DO NOT need medical assistance. You have {{ alertTimer }} second(s) to respond.</label></ion-card-content></ion-card></center>
 
   </ion-content>
 

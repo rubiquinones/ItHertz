@@ -61,11 +61,15 @@ angular.module('ItHertz', ['ionic'])
     .state('about', {
       url: '/about',
       templateUrl: 'about.html'
+    })
+    .state('alert', {
+      url: '/alert',
+      templateUrl: 'alert.html'
     });
 
     $urlRouterProvider.otherwise('/');
 }])
-.controller('MainCtrl', function ($scope, $timeout, $ionicModal, $ionicSideMenuDelegate, PersonalInfo) {
+.controller('MainCtrl', function ($scope, $timeout, $interval, $ionicModal, $state, $ionicSideMenuDelegate, PersonalInfo) {
   // Get status of application
   $scope.protected = window.localStorage['protected'];
 
@@ -103,7 +107,7 @@ angular.module('ItHertz', ['ionic'])
     }
   };
 
-  $scope.setupVehicle = function (vehicleInfo) {
+  $scope.setupVehicle = function (vehicleInfo, skipAll) {
     $scope.setupVehicleModal.hide();
     VehicleInfo.save(vehicleInfo);
 
@@ -121,6 +125,17 @@ angular.module('ItHertz', ['ionic'])
     $ionicSideMenuDelegate.toggleLeft();
   };
 
+  $scope.initAlert = function (seconds) {
+    $scope.alertTimer = seconds;
+    $interval(function () {
+        $scope.alertTimer -= 1;
+
+        if ($scope.alertTimer == 0) {
+          console.log("Calling emergency services")
+        }
+    }, 1000, seconds);
+  };
+
   document.addEventListener("deviceready", function () {
     if (!PersonalInfo.all()) {
       $scope.personalInfo = {};
@@ -130,7 +145,11 @@ angular.module('ItHertz', ['ionic'])
     // - NOTIFICATIONS -
 
     cordova.plugins.notification.local.registerPermission(function (granted) {
-        console.log('Permission has been granted: ' + granted);
+      console.log('Permission has been granted: ' + granted);
+    });
+
+    cordova.plugins.notification.local.on('click', function (notification) {
+      $state.go('alert');
     });
 
     // - BACKGROUNDING -
@@ -139,16 +158,19 @@ angular.module('ItHertz', ['ionic'])
 
     // Get informed when the background mode has been activated
     cordova.plugins.backgroundMode.onactivate = function () {
+      var time = new Date();
+      time.setSeconds(time.getSeconds() + 10);
         cordova.plugins.notification.local.schedule({
           id: 1,
-          text: 'Test Message 1'
+          text: 'Test Message 1',
+          at: time
       });
     };
 
     // Get informed when the background mode has been deactivated
     cordova.plugins.backgroundMode.ondeactivate = function () {
-        clearInterval(timer);
-        // cordova.plugins.notification.badge.clear();
+
+      // cordova.plugins.notification.badge.clear();
     };
 
     // navigator.accelerometer.watchAcceleration(

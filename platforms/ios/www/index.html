@@ -44,9 +44,6 @@
         <div ui-sref="about" ng-click="toggleSidebar()" class="item">
           <i class="icon ion-information-circled"></i> About
         </div>
-        <div class="item">
-          X: {{ acceleration.x }}
-        </div>
       </ul>
     </ion-content>
 
@@ -67,7 +64,7 @@
       <!-- Modal content area -->
       <ion-content>
 
-        <form ng-submit="setupUser(personalInfo)">
+        <form ng-submit="setupUser(personalInfo, false)">
           <div class="list">
             <label class="item item-input">
               <input type="text" placeholder="First Name" ng-model="personalInfo.firstName">
@@ -119,7 +116,7 @@
       <!-- Modal content area -->
       <ion-content>
 
-        <form ng-submit="setupVehicle(vehicleInfo)">
+        <form ng-submit="setupVehicle(vehicleInfo, false)">
           <div class="list">
             <label class="item item-input">
               <input type="text" placeholder="Car or Van or Truck" ng-model="vehicleInfo.type">
