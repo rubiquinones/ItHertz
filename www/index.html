@@ -54,13 +54,13 @@
 </ion-side-menus>
 
    <!-- FIRST TIME SETUP 1 -->
-  <script id="setup-user.html" type="text/ng-template">
+  <script id="setup-user-1.html" type="text/ng-template">
 
     <div class="modal">
 
       <!-- Modal header bar -->
       <ion-header-bar class="bar-secondary">
-        <h1 class="title">First Time Setup Personal Information</h1>
+        <h1 class="title">Personal Information</h1>
         <!-- <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button> -->
       </ion-header-bar>
 
@@ -106,26 +106,26 @@
   </script> <!-- End of First Time Setup 1 -->
 
    <!-- FIRST TIME SETUP 2 -->
-  <script id="setup-user2.html" type="text/ng-template">
+  <script id="setup-user-2.html" type="text/ng-template">
 
     <div class="modal">
 
       <!-- Modal header bar -->
       <ion-header-bar class="bar-secondary">
-        <h1 class="title">First Time Setup Vehicle Information</h1>
+        <h1 class="title">Add Vehicle Information</h1>
         <!-- <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button> -->
       </ion-header-bar>
 
       <!-- Modal content area -->
       <ion-content>
 
-        <form ng-submit="setupUser(personalInfo)">
+        <form ng-submit="setupVehicle(vehicleInfo)">
           <div class="list">
             <label class="item item-input">
-              <input type="text" placeholder="Car or Van or Truck" ng-model="personalInfo.model">
+              <input type="text" placeholder="Car or Van or Truck" ng-model="vehicleInfo.type">
             </label>
             <label class = "item item-input">
-              <input type="text" placeholder ="color" ng-model="personalInfo.color">
+              <input type="text" placeholder ="color" ng-model="vehicleInfo.color">
             </label>
           </div>
           <div class="padding">
@@ -140,35 +140,32 @@
   </script> <!-- End of First Time Setup 2 -->
 
    <!-- FIRST TIME SETUP 3-->
-  <script id="setup-user3.html" type="text/ng-template">
+  <script id="setup-user-3.html" type="text/ng-template">
 
     <div class="modal">
 
       <!-- Modal header bar -->
       <ion-header-bar class="bar-secondary">
-        <h1 class="title">First Time Setup</h1>
+        <h1 class="title">Additional Emergency Contacts</h1>
         <!-- <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button> -->
       </ion-header-bar>
 
       <!-- Modal content area -->
       <ion-content>
 
-        <form ng-submit="setupUser(personalInfo)">
+        <form ng-submit="setupContacts(personalInfo)">
           <div class="list">
             <label class="item item-input">
-              <input type="text" placeholder="Pimary Contact: First Name" ng-model="personalInfo.pcFirst">
+              <input type="text" placeholder="Pimary Contact: First Name" ng-model="contactInfo.pcFirst">
             </label>
             <label class = "item item-input">
-              <input type="text" placeholder ="Primary Contact: Last Name" ng-model="personalInfo.pcLast">
+              <input type="text" placeholder ="Primary Contact: Last Name" ng-model="contactInfo.pcLast">
             </label>
             <label class = "item item-input">
-              <input type="text" placeholder ="Relationship" ng-model="personalInfo.relationship">
+              <input type="text" placeholder ="Relationship" ng-model="contactInfo.relationship">
             </label>
             <label class = "item item-input">
-              <input type="text" placeholder ="Phone Number" ng-model="personalInfo.phoneNumber">
-            </label>
-            <label class = "item item-input">
-              <input type="text" placeholder ="E-Mail" ng-model="personalInfo.email">
+              <input type="text" placeholder ="Phone Number" ng-model="contactInfo.phoneNumber">
             </label>
           </div>
           <div class="padding">
