@@ -1,118 +1,179 @@
-angular.module('todo', ['ionic'])
+angular.module('ItHertz', ['ionic'])
 /**
  * The Projects factory handles saving and loading projects
  * from local storage, and also lets us save and load the
  * last active project index.
  */
-.factory('Projects', function() {
+.factory('PersonalInfo', function () {
   return {
-    all: function() {
-      var projectString = window.localStorage['projects'];
-      if(projectString) {
-        return angular.fromJson(projectString);
+    all: function () {
+      var personalInfo = window.localStorage['personalInfo'];
+      if (personalInfo) {
+        return angular.fromJson(personalInfo);
       }
-      return [];
+
+      return null;
     },
-    save: function(projects) {
-      window.localStorage['projects'] = angular.toJson(projects);
-    },
-    newProject: function(projectTitle) {
-      // Add a new project
-      return {
-        title: projectTitle,
-        tasks: []
-      };
-    },
-    getLastActiveIndex: function() {
-      return parseInt(window.localStorage['lastActiveProject']) || 0;
-    },
-    setLastActiveIndex: function(index) {
-      window.localStorage['lastActiveProject'] = index;
+
+    save: function (personalInfo) {
+      window.localStorage['personalInfo'] = angular.toJson(personalInfo);
     }
   }
 })
+.factory('VehicleInfo', function () {
+  return {
+    all: function () {
+      var vehicleInfo = window.localStorage['vehicleInfo'];
+      if (vehicleInfo) {
+        return angular.fromJson(vehicleInfo);
+      }
 
-.controller('TodoCtrl', function($scope, $timeout, $ionicModal, Projects, $ionicSideMenuDelegate) {
+      return null;
+    },
 
-  // A utility function for creating a new project
-  // with the given projectTitle
-  var createProject = function(projectTitle) {
-    var newProject = Projects.newProject(projectTitle);
-    $scope.projects.push(newProject);
-    Projects.save($scope.projects);
-    $scope.selectProject(newProject, $scope.projects.length-1);
-  }
-
-
-  // Load or initialize projects
-  $scope.projects = Projects.all();
-
-  // Grab the last active, or the first project
-  $scope.activeProject = $scope.projects[Projects.getLastActiveIndex()];
-
-  // Called to create a new project
-  $scope.newProject = function() {
-    var projectTitle = prompt('Project name');
-    if(projectTitle) {
-      createProject(projectTitle);
+    save: function (vehicleInfo) {
+      window.localStorage['vehicleInfo'] = angular.toJson(vehicleInfo);
     }
-  };
+  }
+})
+.factory('ContactInfo', function () {
+  return {
+    all: function () {
+      var contactInfo = window.localStorage['contactInfo'];
+      if (contactInfo) {
+        return angular.fromJson(contactInfo);
+      }
 
-  // Called to select the given project
-  $scope.selectProject = function(project, index) {
-    $scope.activeProject = project;
-    Projects.setLastActiveIndex(index);
-    $ionicSideMenuDelegate.toggleLeft(false);
-  };
+      return null;
+    },
 
-  // Create our modal
-  $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
-    $scope.taskModal = modal;
+    save: function (contactInfo) {
+      window.localStorage['contactInfo'] = angular.toJson(contactInfo);
+    }
+  }
+})
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: 'home.html'
+    })
+    .state('about', {
+      url: '/about',
+      templateUrl: 'about.html'
+    });
+
+    $urlRouterProvider.otherwise('/');
+}])
+.controller('MainCtrl', function ($scope, $timeout, $ionicModal, $ionicSideMenuDelegate, PersonalInfo) {
+  // Get status of application
+  $scope.protected = window.localStorage['protected'];
+
+  // Setup variables
+  $scope.app = {
+    title: "ItHertz"
+  };
+  $scope.acceleration = {};
+
+  // Create our modals
+  $ionicModal.fromTemplateUrl('setup-user-1.html', function (modal) {
+    $scope.setupUserModal = modal;
   }, {
     scope: $scope
   });
 
-  $scope.createTask = function(task) {
-    if(!$scope.activeProject || !task) {
-      return;
+  $ionicModal.fromTemplateUrl('setup-user-2.html', function (modal) {
+    $scope.setupVehicleModal = modal;
+  }, {
+    scope: $scope
+  });
+
+  $ionicModal.fromTemplateUrl('setup-user-3.html', function (modal) {
+    $scope.setupContactModal = modal;
+  }, {
+    scope: $scope
+  });
+
+  $scope.setupUser = function (personalInfo, skipAll) {
+    $scope.setupUserModal.hide();
+    PersonalInfo.save(personalInfo);
+
+    if (!skipAll) {
+      $scope.setupVehicleModal.show();
     }
-    $scope.activeProject.tasks.push({
-      title: task.title
-    });
-    $scope.taskModal.hide();
-
-    // Inefficient, but save all the projects
-    Projects.save($scope.projects);
-
-    task.title = "";
   };
 
-  $scope.newTask = function() {
-    $scope.taskModal.show();
+  $scope.setupVehicle = function (vehicleInfo) {
+    $scope.setupVehicleModal.hide();
+    VehicleInfo.save(vehicleInfo);
+
+    if (!skipAll) {
+      $scope.setupContactModal.show();
+    }
   };
 
-  $scope.closeNewTask = function() {
-    $scope.taskModal.hide();
-  }
+  $scope.setupContacts = function (contactInfo) {
+    $scope.setupContactModal.hide();
+    ContactInfo.save(contactInfo);
+  };
 
-  $scope.toggleProjects = function() {
+  $scope.toggleSidebar = function () {
     $ionicSideMenuDelegate.toggleLeft();
   };
 
-
-  // Try to create the first project, make sure to defer
-  // this by using $timeout so everything is initialized
-  // properly
-  $timeout(function() {
-    if($scope.projects.length == 0) {
-      while(true) {
-        var projectTitle = prompt('Your first project title:');
-        if(projectTitle) {
-          createProject(projectTitle);
-          break;
-        }
-      }
+  document.addEventListener("deviceready", function () {
+    if (!PersonalInfo.all()) {
+      $scope.personalInfo = {};
+      $scope.setupUserModal.show();
     }
-  });
 
+    // - NOTIFICATIONS -
+
+    cordova.plugins.notification.local.registerPermission(function (granted) {
+        console.log('Permission has been granted: ' + granted);
+    });
+
+    // - BACKGROUNDING -
+
+    cordova.plugins.backgroundMode.enable();
+
+    // Get informed when the background mode has been activated
+    cordova.plugins.backgroundMode.onactivate = function () {
+        cordova.plugins.notification.local.schedule({
+          id: 1,
+          text: 'Test Message 1'
+      });
+    };
+
+    // Get informed when the background mode has been deactivated
+    cordova.plugins.backgroundMode.ondeactivate = function () {
+        clearInterval(timer);
+        // cordova.plugins.notification.badge.clear();
+    };
+
+    // navigator.accelerometer.watchAcceleration(
+    //   function success(result) {
+    //     $scope.acceleration = result;
+    //   },
+    //   function error(error) {
+    //     $scope.acceleration.x = error;
+    //   },{
+    //     frequency: 1000,
+    //     period: 1000
+    //   });
+
+    // accelerometer.then(
+    //   function () {
+    //     $scope.acceleration.y = "idon'tknowhwatimdoing";
+    //   },
+    //   function (error) {
+    //     $scope.acceleration.x = "error";
+    //   },
+    //   function (result) {
+    //     $scope.acceleration.z = "noterror";
+    //     // $scope.acceleration = angular.copy(result);
+    //   });
+
+  }, false);
+  
 });
